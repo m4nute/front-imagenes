@@ -1,4 +1,5 @@
 <script lang="ts">
+  import toast from "svelte-french-toast"
   import { Button } from "$lib/components/ui/button"
   import { Input } from "$lib/components/ui/input"
   import * as Select from "$lib/components/ui/select"
@@ -35,7 +36,10 @@
   async function applyFilter() {
     if (!selectedImage || !filtro || threads === 0 || parametro < 0) {
       // Check if all required parameters are set
-      console.error("Please fill in all parameters.")
+      toast.error("Rellena los parametros correctamente", {
+        style: "border-radius: 200px; background: #222; color: #fff;",
+        position: "bottom-center"
+      })
       return
     }
 
@@ -61,10 +65,16 @@
         // Assuming the result contains the filtered image URL
         filteredImage = url
       } else {
-        console.error("Failed to upload and process the image.")
+        toast.error("Error: Checkea los parametros", {
+          style: "border-radius: 200px; background: #222; color: #fff;",
+          position: "bottom-center"
+        })
       }
     } catch (error) {
-      console.error("An error occurred while processing the request:", error)
+      toast.error("Error: Checkea los parametros", {
+        style: "border-radius: 200px; background: #222; color: #fff;",
+        position: "bottom-center"
+      })
     }
   }
 </script>
